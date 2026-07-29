@@ -131,7 +131,7 @@ const update = async (id: string, input: UpdatePostInput): Promise<Post> => {
     await uploadService.deleteAsset(existing.pdfPublicId, 'raw');
   }
 
-  const content = input.content ?? (existing.content as unknown as BlogBlock[]);
+  // const content = input.content ?? (existing.content as unknown as BlogBlock[]);
   const readTime = input.content ? calculateReadTime(input.content) : undefined;
   const excerpt = input.content ? buildExcerpt(input.content) : undefined;
 
