@@ -79,15 +79,7 @@ const findById = async (id: string) => prisma.post.findUnique({ where: { id } })
 const findRelated = async (
   category: string,
   excludeId: string
-): Promise<                    
-  Array<{
-    id: string;
-    slug: string;
-    title: string;
-    image: string;
-    readTime: number;
-  }>
-> =>
+) =>
   prisma.post.findMany({
     where: {
       category,
@@ -96,10 +88,30 @@ const findRelated = async (
     },
     orderBy: { publishedAt: 'desc' },
     take: RELATED_POSTS_LIMIT,
-    select: { id: true, slug: true, title: true, image: true, readTime: true },
-  })
-;
+    select: {
+      id: true,
+      slug: true,
+      title: true,
+      subtitle: true,
+      category: true,
+      author: true,
+      excerpt: true,
+      readTime: true,
+      image: true,
+      featured: true,
+      publishedAt: true,
+    },
+  });
 
+const findDistinctCategories = async (status?: PostStatus): Promise<string[]> => {
+  const results = await prisma.post.findMany({
+    where: status ? { status } : {},
+    select: { category: true },
+    distinct: ['category'],
+    orderBy: { category: 'asc' },
+  });
+  return results.map((r) => r.category);
+};
 const create = async (data: Prisma.PostCreateInput) =>
   prisma.post.create({ data });
 
@@ -115,6 +127,7 @@ export const blogRepository = {
   findBySlug,
   findById,
   findRelated,
+  findDistinctCategories,
   create,
   update,
   remove,

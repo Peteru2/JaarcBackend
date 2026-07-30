@@ -39,6 +39,16 @@ const adminList = asyncHandler(async (req: Request, res: Response) => {
   sendSuccess(res, posts, 'Posts retrieved successfully.', HttpStatus.OK, meta);
 });
 
+const listCategories = asyncHandler(async (_req: Request, res: Response) => {
+  const categories = await blogService.getCategories(false);
+  sendSuccess(res, categories, 'Categories retrieved successfully.');
+});
+
+const adminListCategories = asyncHandler(async (_req: Request, res: Response) => {
+  const categories = await blogService.getCategories(true);
+  sendSuccess(res, categories, 'Categories retrieved successfully.');
+});
+
 const adminGetById = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params as { id: string };
   const post = await blogService.getAdminById(id);
@@ -76,6 +86,8 @@ export const blogController = {
   getBySlug,
   adminList,
   adminGetById,
+  listCategories,
+  adminListCategories,
   create,
   update,
   remove,

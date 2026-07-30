@@ -12,7 +12,10 @@ export const createContactSubmissionSchema = z.object({
 export const listSubmissionsQuerySchema = z.object({
   page: z.coerce.number().int().positive().default(1),
   limit: z.coerce.number().int().positive().max(50).default(20),
-  isRead: z.coerce.boolean().optional(),
+ isRead: z
+  .enum(['true', 'false'])
+  .optional()
+  .transform((value) => (value === undefined ? undefined : value === 'true')),
 });
 
 export const idParamSchema = z.object({

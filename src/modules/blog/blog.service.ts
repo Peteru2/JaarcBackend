@@ -9,17 +9,17 @@ import { blogRepository } from './blog.repository';
 import type { CreatePostInput, UpdatePostInput } from './blog.validation';
 import type { BlogBlock } from '../../types/blog.types';
 
-interface RelatedPost {
-  id: string;
-  slug: string;
-  title: string;
-  image: string;
-  readTime: number;
-}
+// interface RelatedPost {
+//   id: string;
+//   slug: string;
+//   title: string;
+//   image: string;
+//   readTime: number;
+// }
 
-interface PublicPostDetail extends Post {
-  relatedPosts: RelatedPost[];
-}
+// interface PublicPostDetail extends Post {
+//   relatedPosts: RelatedPost[];
+// }
 
 const toJsonContent = (content: BlogBlock[]): Prisma.InputJsonValue =>
   content as unknown as Prisma.InputJsonValue;
@@ -42,7 +42,7 @@ const getPublishedList = async (
 const getFeatured = async (): Promise<unknown[]> =>
   blogRepository.findFeatured(6);
 
-const getBySlug = async (slug: string): Promise<PublicPostDetail> => {
+const getBySlug = async (slug: string): Promise<Post & { relatedPosts: unknown[] }> => {
   const post = await blogRepository.findBySlug(slug, 'PUBLISHED');
 
   if (!post) {
@@ -188,12 +188,16 @@ const publish = async (id: string): Promise<Post> => {
   });
 };
 
+const getCategories = async (adminView: boolean): Promise<string[]> =>
+  blogRepository.findDistinctCategories(adminView ? undefined : 'PUBLISHED');
+
 export const blogService = {
   getPublishedList,
   getFeatured,
   getBySlug,
   getAdminList,
   getAdminById,
+  getCategories,
   create,
   update,
   remove,

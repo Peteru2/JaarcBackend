@@ -59,3 +59,7 @@ adminBlogRouter.patch(
   validate({ params: idParamSchema }),
   blogController.publish
 );
+
+publicBlogRouter.get('/categories', blogController.listCategories);
+
+adminBlogRouter.get('/categories', blogController.adminListCategories);
