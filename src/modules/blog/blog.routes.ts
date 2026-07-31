@@ -12,13 +12,14 @@ import {
 import { blogController } from './blog.controller';
 
 export const publicBlogRouter = Router();
+publicBlogRouter.get('/categories', blogController.listCategories);
 
 publicBlogRouter.get(
   '/',
   validate({ query: listPostsQuerySchema }),
   blogController.listPublished
 );
-publicBlogRouter.get('/featured', blogController.listFeatured);
+
 publicBlogRouter.get(
   '/:slug',
   validate({ params: slugParamSchema }),
@@ -28,6 +29,8 @@ publicBlogRouter.get(
 export const adminBlogRouter = Router();
 
 adminBlogRouter.use(authenticate);
+
+adminBlogRouter.get('/categories', blogController.adminListCategories);
 
 adminBlogRouter.get(
   '/',
@@ -60,6 +63,4 @@ adminBlogRouter.patch(
   blogController.publish
 );
 
-publicBlogRouter.get('/categories', blogController.listCategories);
 
-adminBlogRouter.get('/categories', blogController.adminListCategories);
