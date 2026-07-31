@@ -32,6 +32,11 @@ export const createApp = (): Application => {
       },
     })
   );
+  app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  })
+);
 
   app.use('/api/v1', globalLimiter, apiRouter);
 
