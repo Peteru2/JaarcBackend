@@ -54,7 +54,8 @@ export const ModelName = {
   User: 'User',
   Post: 'Post',
   Service: 'Service',
-  ContactSubmission: 'ContactSubmission'
+  ContactSubmission: 'ContactSubmission',
+  Event: 'Event'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -136,6 +137,29 @@ export const ContactSubmissionScalarFieldEnum = {
 } as const
 
 export type ContactSubmissionScalarFieldEnum = (typeof ContactSubmissionScalarFieldEnum)[keyof typeof ContactSubmissionScalarFieldEnum]
+
+
+export const EventScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  tags: 'tags',
+  host: 'host',
+  locationType: 'locationType',
+  locationValue: 'locationValue',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  image: 'image',
+  imagePublicId: 'imagePublicId',
+  excerpt: 'excerpt',
+  description: 'description',
+  registrationUrl: 'registrationUrl',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
 
 
 export const SortOrder = {

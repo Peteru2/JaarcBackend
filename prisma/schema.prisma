@@ -79,3 +79,36 @@ model ContactSubmission {
   @@index([isRead])
   @@map("contact_submissions")
 }
+
+enum EventLocationType {
+  PHYSICAL
+  VIRTUAL
+}
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Event {
+  id              String            @id @default(cuid())
+  slug            String            @unique
+  title           String
+  tags            String[]
+  host            String
+  locationType    EventLocationType
+  locationValue   String
+  startDate       DateTime
+  endDate         DateTime?
+  image           String
+  imagePublicId   String?
+  excerpt         String
+  description     Json
+  registrationUrl String?
+  status          EventStatus       @default(DRAFT)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([status, startDate])
+  @@map("events")
+}

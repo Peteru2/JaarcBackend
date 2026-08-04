@@ -59,3 +59,8 @@ export type Service = Prisma.ServiceModel
  * 
  */
 export type ContactSubmission = Prisma.ContactSubmissionModel
+/**
+ * Model Event
+ * 
+ */
+export type Event = Prisma.EventModel

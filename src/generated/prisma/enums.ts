@@ -15,3 +15,19 @@ export const PostStatus = {
 } as const
 
 export type PostStatus = (typeof PostStatus)[keyof typeof PostStatus]
+
+
+export const EventLocationType = {
+  PHYSICAL: 'PHYSICAL',
+  VIRTUAL: 'VIRTUAL'
+} as const
+
+export type EventLocationType = (typeof EventLocationType)[keyof typeof EventLocationType]
+
+
+export const EventStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED'
+} as const
+
+export type EventStatus = (typeof EventStatus)[keyof typeof EventStatus]

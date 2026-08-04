@@ -3,14 +3,11 @@ import { healthRouter } from '../modules/health/health.routes';
 import { authRouter } from '../modules/auth/auth.routes';
 import { uploadRouter } from '../modules/upload/upload.routes';
 import { publicBlogRouter, adminBlogRouter } from '../modules/blog/blog.routes';
-import {
-  publicServiceRouter,
-  adminServiceRouter,
-} from '../modules/service/service.routes';
-import {
-  publicContactRouter,
-  adminContactRouter,
-} from '../modules/contact/contact.routes';
+import { publicServiceRouter, adminServiceRouter } from '../modules/service/service.routes';
+import { publicContactRouter, adminContactRouter } from '../modules/contact/contact.routes';
+import { publicEventRouter, adminEventRouter } from '../modules/event/event.routes';
+import { sitemapRouter } from '../modules/sitemap/sitemap.routes';
+
 
 export const apiRouter = Router();
 
@@ -23,3 +20,8 @@ apiRouter.use('/services', publicServiceRouter);
 apiRouter.use('/admin/services', adminServiceRouter);
 apiRouter.use('/contact', publicContactRouter);
 apiRouter.use('/admin/contact', adminContactRouter);
+apiRouter.use('/events', publicEventRouter);
+apiRouter.use('/admin/events', adminEventRouter);
+
+
+apiRouter.use('/sitemap.xml', sitemapRouter);
